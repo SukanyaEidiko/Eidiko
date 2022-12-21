@@ -1,0 +1,40 @@
+BROKER SCHEMA com.eidiko.timer
+
+DECLARE TRIGGING EXTERNAL CHARACTER '';
+CREATE COMPUTE MODULE Repeated_Time_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		 CALL CopyEntireMessage();
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		DECLARE TRIGG TIME CAST(TRIGGING AS TIME) ;
+		DECLARE CURRENT TIME CAST(CURRENT_TIME AS TIME FORMAT 'HH:mm:ss');
+		IF CURRENT < TRIGG THEN
+		SET OutputLocalEnvironment.TimeoutRequest.Action = 'SET';
+        SET OutputLocalEnvironment.TimeoutRequest.Identifier = 'repeat';
+        SET OutputLocalEnvironment.TimeoutRequest.StartDate='TODAY';
+        SET OutputLocalEnvironment.TimeoutRequest.StartTime=TRIGG;
+        SET OutputLocalEnvironment.TimeoutRequest.Interval=86400; 	
+		ELSE
+		DECLARE startdate TIME (CURRENT_TIME + INTERVAL '1' DAY);
+		SET OutputLocalEnvironment.TimeoutRequest.Action = 'SET';
+        SET OutputLocalEnvironment.TimeoutRequest.Identifier = 'repeat';
+        SET OutputLocalEnvironment.TimeoutRequest.StartDate='TODAY';
+        SET OutputLocalEnvironment.TimeoutRequest.StartTime=startdate;
+        SET OutputLocalEnvironment.TimeoutRequest.Interval=86400; 
+		END IF;
+	END;
+END MODULE;
