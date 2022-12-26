@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dfdl="http://www.ogf.org/dfdl/dfdl-1.0/" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:ibmDfdlExtn="http://www.ibm.com/dfdl/extensions" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:recFixLengthFieldsFmt="http://www.ibm.com/dfdl/RecordFixLengthFieldFormat">
+
+    <xsd:import namespace="http://www.ibm.com/dfdl/RecordFixLengthFieldFormat" schemaLocation="IBMdefined/RecordFixLengthFieldFormat.xsd"/>
+    <xsd:annotation>
+		<xsd:appinfo source="http://www.ogf.org/dfdl/">
+			<dfdl:format encoding="US-ASCII" escapeSchemeRef="" occursCountKind="fixed" ref="recFixLengthFieldsFmt:RecordFixLengthFieldsFormat"/>
+		</xsd:appinfo>
+	</xsd:annotation>
+
+	<xsd:element dfdl:lengthKind="delimited" ibmSchExtn:docRoot="true" name="COBOL_Fixed">
+		<xsd:complexType>
+			<xsd:sequence dfdl:separator="%CR;%LF;%WSP*;" dfdl:separatorSuppressionPolicy="anyEmpty">
+				<xsd:element dfdl:initiator="" dfdl:lengthKind="delimited" name="header">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element dfdl:initiator="01" dfdl:length="10" dfdl:lengthKind="explicit" dfdl:terminator="" dfdl:textStringJustification="center" ibmDfdlExtn:sampleValue="head_valu1" name="MYRECORD" type="xsd:string"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element dfdl:initiator="" dfdl:lengthKind="delimited" dfdl:occursCountKind="implicit" maxOccurs="unbounded" name="body">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element dfdl:initiator="05" dfdl:length="44" dfdl:terminator="%NL;" ibmDfdlExtn:sampleValue="body_valu1" name="CLAIMNUMBER" type="xsd:string"/>
+							<xsd:element dfdl:initiator="05" dfdl:length="32" dfdl:terminator="%NL;" ibmDfdlExtn:sampleValue="body_valu2" name="ADMISSIONDATE" type="xsd:string"/>
+							<xsd:element dfdl:initiator="05" dfdl:length="32" dfdl:terminator="%NL;" ibmDfdlExtn:sampleValue="body_valu3" name="FROMDATE" type="xsd:string"/>
+                            <xsd:element dfdl:initiator="05" dfdl:length="32" dfdl:terminator="%NL;" ibmDfdlExtn:sampleValue="body_value4" name="THRUDATE" type="xsd:string"/>
+                            <xsd:element dfdl:initiator="05" dfdl:length="32" dfdl:terminator="%NL;" ibmDfdlExtn:sampleValue="body_value5" name="DISCHARGEDATE" type="xsd:string"/>
+                            <xsd:element dfdl:initiator="05" dfdl:length="30" dfdl:terminator="%NL;" ibmDfdlExtn:sampleValue="body_value6" name="FULLDAYS" type="xsd:string"/>
+                            <xsd:element dfdl:initiator="05" dfdl:length="29" dfdl:terminator="%NL;" ibmDfdlExtn:sampleValue="body_value7" name="COINSURANCEDAYS" type="xsd:string"/>
+                            <xsd:element dfdl:initiator="05" dfdl:length="28" dfdl:terminator="%NL;" ibmDfdlExtn:sampleValue="body_value8" name="LIFETIME-RESDAYS" type="xsd:string"/>
+                            <xsd:element dfdl:initiator="05" dfdl:length="30" dfdl:terminator="%NL;" ibmDfdlExtn:sampleValue="body_value9" name="INTERMEDIARYNUM" type="xsd:string"/>
+                            <xsd:element dfdl:initiator="05" dfdl:length="38" dfdl:terminator="%NL;" ibmDfdlExtn:sampleValue="body_value10" name="PROVIDER" type="xsd:string"/>
+                            <xsd:element dfdl:initiator="05" dfdl:length="31" dfdl:terminator="%NL;" ibmDfdlExtn:sampleValue="body_value11" name="INPATIENTDED" type="xsd:string"/>
+                            <xsd:element dfdl:initiator="05" dfdl:length="31" dfdl:terminator="%NL;" ibmDfdlExtn:sampleValue="body_value12" name="BLOODDED" type="xsd:string"/>
+                            <xsd:element dfdl:initiator="05" dfdl:length="31" dfdl:terminator="%NL;" ibmDfdlExtn:sampleValue="body_value13" name="TOTALCHARGES" type="xsd:string"/>
+                            <xsd:element dfdl:initiator="05" dfdl:length="27" dfdl:terminator="%NL;" ibmDfdlExtn:sampleValue="body_value14" name="PATIENTSTATUS" type="xsd:string"/>
+                            <xsd:element dfdl:initiator="05" dfdl:length="30" dfdl:terminator="%NL;" ibmDfdlExtn:sampleValue="body_value15" name="BLOODPINTSFURNISHED" type="xsd:string"/>
+                            <xsd:element dfdl:initiator="05" dfdl:length="29" dfdl:terminator="%NL;" ibmDfdlExtn:sampleValue="body_value16" name="BLOODPINTSREPLACED" type="xsd:string"/>
+                            <xsd:element dfdl:initiator="05" dfdl:length="28" dfdl:terminator="%NL;" ibmDfdlExtn:sampleValue="body_value17" name="SEQUENCECOUNTER" type="xsd:string"/>
+                            <xsd:element dfdl:initiator="05" dfdl:length="35" dfdl:terminator="%NL;" ibmDfdlExtn:sampleValue="body_value18" name="TRANSACTIONIND" type="xsd:string"/>
+                            <xsd:element dfdl:initiator="05" dfdl:length="35" dfdl:terminator="%NL;" ibmDfdlExtn:sampleValue="body_value19" name="BILLSOURCE" type="xsd:string"/>
+                            <xsd:element dfdl:initiator="05" dfdl:length="35" dfdl:terminator="%NL;" ibmDfdlExtn:sampleValue="body_value20" name="BENEFITSEXHAUSTIND" type="xsd:string"/>
+                            <xsd:element dfdl:initiator="05" dfdl:length="35" dfdl:terminator="%NL;" ibmDfdlExtn:sampleValue="body_value21" name="BENEFITSPAYIND" type="xsd:string"/>
+                            <xsd:element dfdl:initiator="05" dfdl:length="26" dfdl:terminator="%NL;" ibmDfdlExtn:sampleValue="body_value22" name="AUTOADJUSTMENTIND" type="xsd:string"/>
+                            <xsd:element dfdl:initiator="05" dfdl:length="48" dfdl:terminator="" ibmDfdlExtn:sampleValue="body_value23" name="INTERMEDIARYCTRLNUM" type="xsd:string"/>
+                        </xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+
+</xsd:schema>

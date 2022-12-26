@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dfdl="http://www.ogf.org/dfdl/dfdl-1.0/" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:ibmDfdlExtn="http://www.ibm.com/dfdl/extensions" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:recFixLengthFieldsFmt="http://www.ibm.com/dfdl/RecordFixLengthFieldFormat">
+
+    <xsd:import namespace="http://www.ibm.com/dfdl/RecordFixLengthFieldFormat" schemaLocation="IBMdefined/RecordFixLengthFieldFormat.xsd"/>
+        <xsd:group name="ALTERNATE-CONTACT">
+    <xsd:sequence>
+      <xsd:element dfdl:length="5" name="TITLE" type="xsd:string"/>
+      <xsd:element dfdl:length="10" name="LAST_NAME" type="xsd:string"/>
+      <xsd:element dfdl:length="10" dfdl:terminator="" name="FIRST_NAME" type="xsd:string"/>
+                        </xsd:sequence>
+  </xsd:group>
+    <xsd:group name="VP-MARKETING">
+    <xsd:sequence>
+      <xsd:element dfdl:length="10" name="LAST_NAME" type="xsd:string"/>
+      <xsd:element dfdl:length="10" name="FIRST_NAME" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:group>
+    <xsd:group name="PRESIDENT">
+    <xsd:sequence>
+      <xsd:element dfdl:length="10" name="LAST_NAME" type="xsd:string"/>
+      <xsd:element dfdl:length="10" name="FIRST_NAME" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:group>
+    <xsd:annotation>
+		<xsd:appinfo source="http://www.ogf.org/dfdl/">
+			<dfdl:format encoding="US-ASCII" escapeSchemeRef="" occursCountKind="fixed" ref="recFixLengthFieldsFmt:RecordFixLengthFieldsFormat"/>
+		</xsd:appinfo>
+	</xsd:annotation>
+
+	<xsd:element dfdl:lengthKind="delimited" ibmSchExtn:docRoot="true" name="Cobol_Fixed2">
+		<xsd:complexType>
+			<xsd:sequence dfdl:separator="%CR;%LF;%WSP*;" dfdl:separatorSuppressionPolicy="anyEmpty">
+				<xsd:element dfdl:lengthKind="delimited" dfdl:occursCountKind="implicit" maxOccurs="unbounded" name="body">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element dfdl:length="26" ibmDfdlExtn:sampleValue="body_valu1" name="COMPANY_NAME" type="xsd:string"/>
+							<xsd:element dfdl:length="10" ibmDfdlExtn:sampleValue="body_valu2" name="CONTACTS" type="xsd:string"/>
+                                                        						                            <xsd:group ref="PRESIDENT"/>
+                            <xsd:group ref="VP-MARKETING"/>
+                            <xsd:group ref="ALTERNATE-CONTACT"/>
+                                                    <xsd:element dfdl:length="12" name="ADDRESS" type="xsd:string"/>
+                            <xsd:element dfdl:length="12" name="CITY" type="xsd:string"/>
+                            <xsd:element dfdl:length="14" name="STATE" type="xsd:string"/>
+                            <xsd:element dfdl:length="6" name="ZIP" type="xsd:string"/>
+                        </xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+                			                                                            </xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+
+</xsd:schema>
